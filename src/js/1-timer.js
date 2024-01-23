@@ -5,16 +5,20 @@ import "flatpickr/dist/flatpickr.min.css";
 
 
 
-const options = {
+
+let userSelectedDate;
+flatpickr("#datetime-picker", {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
+    userSelectedDate = selectedDates[0];
   },
-};
+} );
 
-flatpickr("#datetime-picker", { options });
 
-let userSelectedDate;
+
+
+console.log(userSelectedDate);
