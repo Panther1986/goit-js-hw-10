@@ -9,8 +9,7 @@ const spanDays = document.querySelector('[data-days]');
 const spanHours = document.querySelector('[data-hours]');
 const spanMinutes = document.querySelector('[data-minutes]');
 const spanSeconds = document.querySelector('[data-seconds]');
-
-
+const divTimer = document.querySelector('.timer');
 
 
 let userSelectedDate;
@@ -77,25 +76,21 @@ const timer = {
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = startTime - currentTime;
-      const { days, hours, minutes, seconds } = convertMs(deltaTime);
-      updateClockFace({ days, hours, minutes, seconds });
-
+      const time = convertMs(deltaTime);
+      spanDays.textContent = time.days;
+      spanHours.textContent = time.hours;
+      spanMinutes.textContent = time.minutes;
+      spanSeconds.textContent = time.seconds;
     }, 1000);
   },
   stop() {
-    clearInterval(this.intervalId);
+    if (deltaTime <= 0) {
+      clearInterval(this.intervalId);
     this.isActive = false;
+    }
   }
 };
 
-
-function updateClockFace({ days, hours, minutes, seconds }) {
-  spanDays.textContent = convertMs(days);
-  spanHours.textContent = convertMs(hours);
-  spanMinutes.textContent = convertMs(minutes);
-  spanSeconds.textContent = convertMs(seconds);
-
-}
 
 
 
